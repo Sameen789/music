@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinhala RAP Music | Created by Keshu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            <div class="keshu-logo-container"><div class="keshu-logo">Keshu</div></div><div class="enjoy-music-container"><div class="enjoy-music-text">Enjoy Music</div></div>
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-right: 1px solid rgba(56, 189, 248, 0.2);
+            z-index: 1000;
+        }
+
+        .sidebar h2 {
+            color: #38bdf8;
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+
+        .nav-item {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            padding: 12px 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover {
+            color: #38bdf8;
+            padding-left: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 240px;
+            padding: 40px;
+        }
+
+        /* Header Section */
+        .site-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .site-header h1 {
+            font-size: 50px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .site-header p {
+            font-size: 16px;
+            color: #38bdf8;
+            margin-top: 5px;
+        }
+
+        /* Updated Artist Cards (5cm x 5cm approx 190px) */
+        .artists-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            justify-content: center;
+        }
+
+        .artist-card {
+            width: 190px;
+            height: 190px;
+            /* 5cm x 5cm approximate */
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.4s;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+
+        .artist-card:hover {
+            transform: scale(1.05);
+            border-color: #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Artist Photo Style */
+        .artist-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid #38bdf8;
+        }
+
+        .artist-card span {
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        /* Song List */
+        .song-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 25px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        audio {
+            height: 32px;
+            filter: invert(100%) hue-rotate(180deg);
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        #searchBox {
+            width: 100%;
+            max-width: 600px;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid #334155;
+            background: #1e293b;
+            color: #fff;
+            outline: none;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            z-index: 2000;
+            display: none;
+            padding: 50px;
+            overflow-y: auto;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .close-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <h2>🎵 MENU</h2>
+        <div class="nav-item" onclick="goHome()">🏠 Home</div>
+        <div class="nav-item" onclick="filterByCategory('all')">📚 All Songs</div>
+        <div class="nav-item" onclick="filterByCategory('normal')">🔥 Normal Rap</div>
+        <div class="nav-item" onclick="filterByCategory('underrated')">💎 Underrated</div>
+        <div class="nav-item" onclick="filterByCategory('others')">🎧 Others</div>
+    </aside>
+
+    <main class="main-content">
+        <header class="site-header">
+            <h1>Sinhala RAP songs</h1>
+            <p>Created by Keshu</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchBox" placeholder="සින්දුවක් හෝ කලාකරුවෙක් සොයන්න..." onkeyup="smartSearch()">
+        </div>
+
+        <div class="artists-grid">
+            <div class="artist-card" onclick="searchByArtist('SMOKIO')">
+                <img src="smokio2.jpg" class="artist-photo" alt="SMOKIO">
+                <span>SMOKIO</span>
+            </div>
+            <div class="artist-card" onclick="searchByArtist('REEZY')">
+                <img src="reezy.png" class="artist-photo" alt="REEZY">
+                <span>REEZY</span>
+            </div>
+            <div class="artist-card" onclick="searchByArtist('PRABA')">
+                <img src="praba.png" class="artist-photo" alt="PRABA">
+                <span>PRABA</span>
+            </div>
+            <div class="artist-card" onclick="searchByArtist('RASTHIYADU')">
+                <img src="rasthiyadu.png" class="artist-photo" alt="RASTHIYADU">
+                <span>RASTHIYADU</span>
+            </div>
+            <div class="artist-card" onclick="searchByArtist('MASTER D')">
+                <img src="masterd.png" class="artist-photo" alt="MASTER D">
+                <span>MASTER D</span>
+            </div>
+        </div>
+
+        <h3 id="listTitle" style="margin-bottom: 25px; color: #38bdf8;">All Tracks</h3>
+        <div id="mainSongDisplay"></div>
+    </main>
+
+    <script>
+        // දත්ත සහ අනෙක් Functions කලින් විදියටම පවතී
+        const masterDatabase = [
+            { title: "Baashawa", artist: "Special", cat: "special", file: "bashawa.mp3" },
+            { title: "Chandi", artist: "Special", cat: "special", file: "chandi.mp3" },
+            { title: "Kindi", artist: "Special", cat: "special", file: "kindi.mp3" },
+            { title: "Jeewitha Gamana", artist: "Special", cat: "special", file: "jiwitha.mp3" },
+            { title: "Koti Salakuna", artist: "Special", cat: "special", file: "koti.mp3" },
+            { title: "Mudukkuwen Eliyata", artist: "SMOKIO", cat: "normal", file: "mudu.mp3" },
+            { title: "Kamini", artist: "SMOKIO", cat: "normal", file: "kamini.mp3" },
+            { title: "Nidahasi", artist: "SMOKIO", cat: "others", file: "Nidahasi.mp3" },
+            { title: "Dewiwaru", artist: "SMOKIO", cat: "normal", file: "dewiwaru.mp3" },
+            { title: "Raawaya", artist: "REEZY", cat: "underrated", file: "raawaya.mp3" },
+            { title: "Thanthra", artist: "REEZY", cat: "underrated", file: "thanthra.mp3" },
+            { title: "Chakra", artist: "REEZY", cat: "underrated", file: "chakra.mp3" },
+            { title: "Apaye Dane", artist: "PRABA", cat: "normal", file: "apaye.mp3" },
+            { title: "Gahanna Wei Gasset", artist: "PRABA", cat: "normal", file: "gasat.mp3" },
+            { title: "Hadahana", artist: "RASTHIYADU_PADANAMA", cat: "others", file: "hadahana.mp3" },
+            { title: "Ko Kariyo Ko", artist: "RASTHIYADU_PADANAMA", cat: "normal", file: "ko.mp3" },
+            { title: "Captain", artist: "MASTER D", cat: "underrated", file: "captain.mp3" },
+            { title: "Bala Walapemi Danna", artist: "MASTER D", cat: "others", file: "bala.mp3" }
+        ];
+
+        function renderList(songs, elementId) {
+            const container = document.getElementById(elementId);
+            container.innerHTML = songs.map(s => `
+                <div class="song-item">
+                    <div>
+                        <h4 style="color:#fff;">${s.title}</h4>
+                        <span style="color:#38bdf8; font-size:12px;">${s.artist}</span>
+                    </div>
+                    <audio controls><source src="${s.file ? s.file : '#'}" type="audio/mpeg"></audio>
+                </div>
+            `).join('');
+        }
+
+        function goHome() {
+            document.getElementById('searchBox').value = "";
+            filterByCategory('all');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function smartSearch() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            const results = masterDatabase.filter(s =>
+                s.title.toLowerCase().includes(query) || s.artist.toLowerCase().includes(query)
+            );
+            renderList(results, 'mainSongDisplay');
+        }
+
+        function filterByCategory(category) {
+            const filtered = category === 'all' ? masterDatabase : masterDatabase.filter(s => s.cat === category);
+            document.getElementById('listTitle').innerText = category.toUpperCase() + " Tracks";
+            renderList(filtered, 'mainSongDisplay');
+        }
+
+        function searchByArtist(name) {
+            document.getElementById('searchBox').value = name;
+            smartSearch();
+        }
+
+        window.onload = () => renderList(masterDatabase, 'mainSongDisplay');
+    </script>
+</body>
+
+</html>
